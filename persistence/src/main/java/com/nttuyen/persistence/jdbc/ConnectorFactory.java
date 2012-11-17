@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.jdbc;
+package com.nttuyen.persistence.jdbc;
 
 import java.util.Properties;
 

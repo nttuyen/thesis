@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.annotaion;
+package com.nttuyen.persistence.annotaion;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

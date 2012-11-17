@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.query;
+package com.nttuyen.persistence.query;
 
 import java.lang.reflect.Field;
 import java.sql.Date;
@@ -12,9 +12,9 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.nttuyen.dao.annotaion.Column;
-import com.nttuyen.dao.annotaion.Id;
-import com.nttuyen.dao.annotaion.Table;
+import com.nttuyen.persistence.annotaion.Column;
+import com.nttuyen.persistence.annotaion.Id;
+import com.nttuyen.persistence.annotaion.Table;
 
 /**
  * @author nttuyen

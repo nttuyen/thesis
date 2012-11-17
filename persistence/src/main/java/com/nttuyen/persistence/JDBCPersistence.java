@@ -1,25 +1,27 @@
 /**
  * 
  */
-package com.nttuyen.dao.jdbc;
+package com.nttuyen.persistence;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import com.nttuyen.persistence.jdbc.Connector;
+import com.nttuyen.persistence.query.ResultUtil;
 import org.apache.log4j.Logger;
 
-import com.nttuyen.dao.Persistence;
-import com.nttuyen.dao.PersistenceException;
-import com.nttuyen.dao.annotaion.Column;
-import com.nttuyen.dao.annotaion.Id;
-import com.nttuyen.dao.annotaion.Table;
-import com.nttuyen.dao.query.Criteria;
-import com.nttuyen.dao.query.Queries;
-import com.nttuyen.dao.query.Restrictions;
+import com.nttuyen.persistence.annotaion.Column;
+import com.nttuyen.persistence.annotaion.Id;
+import com.nttuyen.persistence.annotaion.Table;
+import com.nttuyen.persistence.query.Criteria;
+import com.nttuyen.persistence.query.Queries;
+import com.nttuyen.persistence.query.Restrictions;
 
 /**
  * An implement of {@link Persistence} interface
@@ -51,7 +53,7 @@ public class JDBCPersistence implements Persistence{
 			for(Field f : fields) {
 				Id annotation = f.getAnnotation(Id.class);
 				if(annotation != null && !"".equals(annotation.name())) {
-					criteria.add(Restrictions.equal("id", new Long(id)));
+					criteria.add(Restrictions.equal(annotation.name(), new Long(id)));
 					break;
 				}
 			}
@@ -372,20 +374,44 @@ public class JDBCPersistence implements Persistence{
 		
 	}
 	
-	public <T> Iterator<T> list(Class<T> c, String query) {
-		return null;
+	public <T> Iterator<T> list(Class<T> c, long start, int limit) {
+        List<T> list = Collections.emptyList();
+        try {
+            Connection connection = connector.getConnection();
+            Criteria criteria = Queries.createCriteria(connection);
+            criteria.addEntity(c);
+            criteria.limit(start, limit);
+            list = criteria.list();
+        } catch (Exception e){
+            log.error("SQLException", e);
+
+        }
+        return list.iterator();
 	}
 
+    public <T> Iterator<T> list(Class<T> c, String query) {
+        List<T> list = Collections.emptyList();
+        try {
+            Connection connection = connector.getConnection();
+            PreparedStatement stm = connection.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+            list = ResultUtil.fetch(rs, c);
+        } catch (Exception e) {
+            log.error("Query Exception", e);
+        }
+        return list.iterator();
+    }
+
 	public <T> Iterator<T> listAll(Class<T> c) {
-		try {
+        List<T> list = Collections.emptyList();
+        try {
 			Connection connection = connector.getConnection();
 			Criteria criteria = Queries.createCriteria(connection);
 			criteria.addEntity(c);
-			List<T> list = criteria.list();
-			return list.iterator();
+			list = criteria.list();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error("SQLException", e);
 		}
-		return null;
+		return list.iterator();
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao;
+package com.nttuyen.persistence.query;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nttuyen.dao.annotaion.Column;
-import com.nttuyen.dao.annotaion.Id;
-import com.nttuyen.dao.annotaion.Table;
+import com.nttuyen.persistence.annotaion.Column;
+import com.nttuyen.persistence.annotaion.Id;
+import com.nttuyen.persistence.annotaion.Table;
 
 /**
  * Process ResutSet from query

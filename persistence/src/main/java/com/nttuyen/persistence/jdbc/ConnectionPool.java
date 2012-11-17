@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.jdbc;
+package com.nttuyen.persistence.jdbc;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -103,8 +103,8 @@ public class ConnectionPool implements Connector {
 		
 		Connection connection = null;
 		if(free.size() > 0) {
-			connection = free.get(0);
-			free.remove(0);
+			//free.get(0);
+            connection = free.remove(0);
 		}
 		if(connection == null || connection.isClosed()) {
 			//Open new connection
@@ -184,13 +184,5 @@ public class ConnectionPool implements Connector {
 			}
 			return method.invoke(this.connection, args);
 		}
-	}
-	
-
-	/**
-	 * Check full connection
-	 */
-	public synchronized boolean isFull() {
-		return (max > 0 && connections.size() >= max);
 	}
 }

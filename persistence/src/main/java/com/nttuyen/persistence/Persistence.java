@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao;
+package com.nttuyen.persistence;
 
 
 import java.util.Iterator;
@@ -61,7 +61,17 @@ public interface Persistence {
 	 * @return - Iterator of all object in Database
 	 */
 	public <T> Iterator<T> listAll(Class<T> c);
-	
+
+    /**
+     * List objects in Database by query
+     * @param <T>
+     * @param c
+     * @param start - query to retrial object
+     * @param limit
+     * @return - Iterator of objects
+     */
+    public <T> Iterator<T> list(Class<T> c, long start, int limit);
+
 	/**
 	 * List objects in Database by query
 	 * @param <T>

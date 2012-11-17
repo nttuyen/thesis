@@ -10,10 +10,10 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.nttuyen.dao.PersistenceException;
+import com.nttuyen.persistence.PersistenceException;
 import org.apache.log4j.Logger;
-import com.nttuyen.dao.Persistence;
-import com.nttuyen.dao.Persistences;
+import com.nttuyen.persistence.Persistence;
+import com.nttuyen.persistence.Persistences;
 import com.nttuyen.thesis.model.Music;
 import com.nttuyen.thesis.util.Auth;
 import com.nttuyen.web.core.Action;

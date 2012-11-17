@@ -52,4 +52,7 @@
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
+    <listener>
+        <listener-class>com.nttuyen.web.core.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>

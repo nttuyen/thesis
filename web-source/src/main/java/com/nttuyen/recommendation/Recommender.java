@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-import com.nttuyen.dao.query.QueryUtil;
-import com.nttuyen.dao.jdbc.Connector;
-import com.nttuyen.dao.jdbc.ConnectorFactory;
+import com.nttuyen.persistence.query.QueryUtil;
+import com.nttuyen.persistence.jdbc.Connector;
+import com.nttuyen.persistence.jdbc.ConnectorFactory;
 import com.nttuyen.web.core.SystemLoader;
 
 

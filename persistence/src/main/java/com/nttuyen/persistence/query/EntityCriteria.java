@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.query;
+package com.nttuyen.persistence.query;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import com.nttuyen.dao.ResultUtil;
 
 /**
  * @author nttuyen

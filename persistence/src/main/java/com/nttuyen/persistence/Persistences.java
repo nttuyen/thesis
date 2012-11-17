@@ -1,22 +1,21 @@
 /**
  * 
  */
-package com.nttuyen.dao;
+package com.nttuyen.persistence;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import com.nttuyen.dao.annotaion.SQL;
-import com.nttuyen.dao.jdbc.Connector;
-import com.nttuyen.dao.jdbc.ConnectorFactory;
-import com.nttuyen.dao.jdbc.JDBCPersistence;
-import com.nttuyen.dao.query.QueryUtil;
+import com.nttuyen.persistence.annotaion.SQL;
+import com.nttuyen.persistence.jdbc.Connector;
+import com.nttuyen.persistence.jdbc.ConnectorFactory;
+import com.nttuyen.persistence.query.QueryUtil;
+import com.nttuyen.persistence.query.ResultUtil;
 
 /**
  * @author nttuyen
@@ -45,16 +44,6 @@ public class Persistences {
 			map.put(cfg, p);
 			return p;
 		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T> T createPersistence(Class<T> c, Connection connection) {
-		if(!c.isInterface()) {
-			return null;
-		}
-		
-		InvocationHandler handler = new PersistenceHandle(connection);
-		return (T)Proxy.newProxyInstance(c.getClassLoader(), new Class<?>[]{c}, handler);
 	}
 }
 

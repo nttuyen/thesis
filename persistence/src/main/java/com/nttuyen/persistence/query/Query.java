@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.query;
+package com.nttuyen.persistence.query;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -12,7 +12,5 @@ import java.util.List;
  * @since 29.01.2010
  */
 public interface Query {
-	public ResultSet result();
-	
 	public <T> List<T> list(Class<T> c);
 }

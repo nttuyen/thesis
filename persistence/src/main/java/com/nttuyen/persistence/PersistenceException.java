@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao;
+package com.nttuyen.persistence;
 
 /**
  * @author nttuyen

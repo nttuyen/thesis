@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.nttuyen.dao.query;
+package com.nttuyen.persistence.query;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -38,17 +38,22 @@ public class Queries {
 		}
 		
 		public <T> List<T> list(Class<T> c) {
-			return null;
+            List<T> list = Collections.emptyList();
+            try {
+                PreparedStatement stm = this.connection.prepareStatement(this.sql);
+                stm.execute();
+			    list = ResultUtil.fetch(stm.getResultSet(), c);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return list;
 		}
 
-		public ResultSet result() {
-			try {
-				PreparedStatement stm = connection.prepareStatement(this.sql);
-				return stm.executeQuery();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-	}
+        @Override
+        protected void finalize() throws Throwable {
+            try {
+                this.connection.close();
+            } catch (Exception e) {}
+        }
+    }
 }

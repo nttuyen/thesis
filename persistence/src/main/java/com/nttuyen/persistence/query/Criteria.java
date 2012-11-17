@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.nttuyen.dao.query;
+package com.nttuyen.persistence.query;
 
 import java.util.List;
 

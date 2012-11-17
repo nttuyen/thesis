@@ -3,9 +3,9 @@
  */
 package com.nttuyen.thesis.model;
 
-import com.nttuyen.dao.annotaion.Column;
-import com.nttuyen.dao.annotaion.Id;
-import com.nttuyen.dao.annotaion.Table;
+import com.nttuyen.persistence.annotaion.Column;
+import com.nttuyen.persistence.annotaion.Id;
+import com.nttuyen.persistence.annotaion.Table;
 
 /**
  * @author Admin
