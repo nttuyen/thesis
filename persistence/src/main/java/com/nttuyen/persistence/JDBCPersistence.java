@@ -4,10 +4,7 @@
 package com.nttuyen.persistence;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -93,9 +90,10 @@ public class JDBCPersistence implements Persistence{
 			Id id = field.getAnnotation(Id.class);
 			if(id != null && !"".equals(id.name())) {
 				try {
+                    field.setAccessible(true);
 					long val = field.getLong(object);
 					if(val != 0) {
-						
+						//TODO:
 					}
 				} catch (IllegalArgumentException e) {
 					
@@ -133,7 +131,7 @@ public class JDBCPersistence implements Persistence{
 		//Create PreparedStatement
 		try {
 			Connection connection = connector.getConnection();
-			PreparedStatement stm = connection.prepareStatement(query.toString());
+			PreparedStatement stm = connection.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
 			
 			//Fill Value
 			int num = 0;
@@ -234,6 +232,7 @@ public class JDBCPersistence implements Persistence{
 			Id id = field.getAnnotation(Id.class);
 			if(id != null && !"".equals(id.name())) {
 				try {
+                    field.setAccessible(true);
 					long val = field.getLong(object);
 					query.append(" ");
 					query.append(id.name());
@@ -308,8 +307,10 @@ public class JDBCPersistence implements Persistence{
 		Field[] fields = c.getDeclaredFields();
 		for(Field field : fields) {
 			Id id = field.getAnnotation(Id.class);
+            String name = id.name();
 			if(id != null && !"".equals(id.name())) {
 				try {
+                    field.setAccessible(true);
 					long val = field.getLong(object);
 					if(val == 0) {
 						this.insert(object);
@@ -319,7 +320,9 @@ public class JDBCPersistence implements Persistence{
 						return;
 					}
 				} catch (IllegalArgumentException e) {
+                    log.error("IllegalArgumentException", e);
 				} catch (IllegalAccessException e) {
+                    log.error("IllegalAccessException", e);
 				}
 			}
 		}
@@ -347,6 +350,7 @@ public class JDBCPersistence implements Persistence{
 			Id id = field.getAnnotation(Id.class);
 			if(id != null && !"".equals(id.name())) {
 				try {
+                    field.setAccessible(true);
 					long val = field.getLong(object);
 					query.append(" ");
 					query.append(id.name());

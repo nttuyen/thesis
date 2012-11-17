@@ -46,6 +46,7 @@ public class UploadServlet extends HttpServlet {
 		super.init(config);
 		this.config = SystemLoader.systemConfig();
 		this.folderUpload = this.config.getProperty("media.upload.folder");
+        FileUtil.mkdir(folderUpload);
 	}
 
 	/**

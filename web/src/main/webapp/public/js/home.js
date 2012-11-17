@@ -1,12 +1,15 @@
 function onLoad() {
 	new AjaxUpload('button_upload', {
-	  action: 'http://localhost:8080/thesis-web/upload',
+	  //action: 'http://localhost:8080/thesis-web/upload',
+      action: URL_BASE + 'upload',
 	  onSubmit: function() {
 	    this.disable();
 	  }
 	  ,onComplete: function(file, response){
 		  response = response.replace("<pre>", "");
 		  response = response.replace("</pre>", "");
+          response = response.replace(/<(?:.|\n)*?>/gm, '');
+
 		  jQuery("#music_media").attr("value", response);
 		  jQuery("#music_media").attr("readonly", "readonly");
 		  this.enable();

@@ -40,6 +40,7 @@ request.setAttribute("SYSTEM_CONFIG", cfg);
 <script src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
 google.load("jquery", "1.3.2");
+var URL_BASE = "<%=request.getRequestURL().toString().replace(request.getRequestURI().substring(1), request.getContextPath())%>";
 </script>
 
 <script type="text/javascript" src="<%=SITE_URL%>/public/js/jquery-1.3.2.js"></script>

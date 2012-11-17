@@ -74,7 +74,9 @@ public class MusicAction implements Action{
 
             long id = music.getId();
 			String media = music.getMedia();
-			File f = new File(cfg.get("media.upload.folder") + File.separator + Auth.user(request) + "_" + media);
+            File f = new File(cfg.getProperty("media.folder"));
+            f.mkdirs();
+			f = new File(cfg.get("media.upload.folder") + File.separator + Auth.user(request) + "_" + media);
 			if(f.exists()) {
 				String newMedia = id + "_" + media;
 				f.renameTo(new File(cfg.get("media.folder") + File.separator + newMedia));

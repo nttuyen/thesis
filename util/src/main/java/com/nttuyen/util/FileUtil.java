@@ -1,5 +1,6 @@
 package com.nttuyen.util;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 /**
@@ -71,5 +72,13 @@ public class FileUtil {
             return true;
         }
         return false;
+    }
+
+    public static boolean mkdir(String path) {
+        File f = new File(path);
+        if(f.isDirectory()) {
+            return true;
+        }
+        return f.mkdirs();
     }
 }
